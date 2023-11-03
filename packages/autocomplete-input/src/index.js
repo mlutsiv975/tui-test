@@ -51,7 +51,7 @@ class AutocompleteInput extends HTMLElement {
 
     showSuggestions(items, query) {
         this.listElement.innerHTML = '';
-        const regex = new RegExp(query, 'gi'); // Global, case-insensitive
+        const regex = new RegExp(query, 'gi');
         items.forEach(item => {
             const div = document.createElement('div');
             div.innerHTML = item.name.replace(regex, match => `<span class="highlight">${match}</span>`);

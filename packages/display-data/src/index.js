@@ -6,7 +6,7 @@ class DisplayDataComponent extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
 
-        // Clone the template and append it to the shadow root
+
         const template = document.createElement('template');
         template.innerHTML = `<style>${styles.toString()}</style>${htmlString}`;
         this.shadowRoot.appendChild(template.content.cloneNode(true));

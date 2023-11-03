@@ -3,13 +3,17 @@
 To build components and start app - run:
 
 ```
-yarn serve-static
+yarn && yarn serve-static
 ```
 
 ## Thoughts on implementing
-- Monorepo and Lerna used to run scripts simultaneously;
 - Included babel to support ES6 syntax and polyfills for older browsers.
-- Did not add any styles because of time lack, as well as tests coverage. But probably would use Cypress for e2e testing;
+- Monorepo and Lerna used to run scripts simultaneously;
 - Each component has similar setup approach - create a class, extend HTMLElement, add shadow root, add styles, add template, add event listeners, add connectedCallback and disconnectedCallback methods;
-- Tried to use Angular for crate display-data component, but due to issues with bundled files switched back to Vanilla JS (didn't want to spend a lot of time on investigation);
-- Rest of the code is pretty clear I guess so no need for extra comments;
+- Rest of the code is pretty clear I guess, so no need for extra comments;
+
+
+## Things this App don't do
+- Missing package containing shared configs (e.g. webpack) for rest of the packages;
+- Missing appropriate styles or tests due to a lack of time. For end-to-end testing, I would probably use Cypress;
+- Tried to use Angular to create `display-data` component, but due to issues with bundled files switched back to Vanilla JS (didn't want to spend a lot of time on investigation);
