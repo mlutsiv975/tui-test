@@ -1,0 +1,21 @@
+{
+  "name": "untitled",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "lerna run start --parallel",
+    "build": "lerna run build",
+    "serve-static": "yarn build && http-server ./packages/static-wrapper/"
+  },
+  "devDependencies": {
+    "lerna": "^7.4.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}

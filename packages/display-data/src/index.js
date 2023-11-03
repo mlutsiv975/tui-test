@@ -1,39 +1,50 @@
 import styles from "./styles.css";
 import htmlString from "./template.html";
 
-class DatePicker extends HTMLElement {
+class DisplayDataComponent extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
 
-        // Create and append the template
+        // Clone the template and append it to the shadow root
         const template = document.createElement('template');
         template.innerHTML = `<style>${styles.toString()}</style>${htmlString}`;
         this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-        // Elements
-        this.inputElement = this.shadowRoot.querySelector('.date-input');
+        this.autocompleteValueElement = this.shadowRoot.getElementById('autocomplete-value');
+        this.dateValueElement = this.shadowRoot.getElementById('date-value');
 
-        // Bind methods
+        this.handleAutocompleteChange = this.handleAutocompleteChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
     }
 
     connectedCallback() {
-        this.inputElement.addEventListener('change', this.handleDateChange);
+        window.addEventListener('autocomplete-change', this.handleAutocompleteChange);
+        window.addEventListener('date-change', this.handleDateChange);
     }
 
     disconnectedCallback() {
-        this.inputElement.removeEventListener('change', this.handleDateChange);
+        window.removeEventListener('autocomplete-change', this.handleAutocompleteChange);
+        window.removeEventListener('date-change', this.handleDateChange);
+    }
+
+    handleAutocompleteChange(event) {
+        this.autocompleteValueElement.textContent = event.detail.value.name || '-';
     }
 
     handleDateChange(event) {
-        const selectedDate = event.target.value; // The date will be in "YYYY-MM-DD" format
-        this.dispatchEvent(new CustomEvent('date-changed', {
-            detail: { date: selectedDate },
-            bubbles: true, // Allows the event to bubble up through the DOM
-            composed: true // Allows the event to cross the shadow DOM boundary
-        }));
+        const dateValue = event.detail.value || '-';
+        if (dateValue) {
+            this.dateValueElement.textContent = this.formatDateToDDMMYYYY(dateValue);
+        } else {
+            this.dateValueElement.textContent = '-';
+        }
+    }
+
+    formatDateToDDMMYYYY(dateString) {
+        const [year, month, day] = dateString.split('-');
+        return `${day}-${month}-${year}`;
     }
 }
 
-customElements.define('date-picker', DatePicker);
+customElements.define('display-data', DisplayDataComponent);

@@ -1,5 +1,5 @@
 {
-  "name": "@tui/display-data",
+  "name": "@tui/date-input",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

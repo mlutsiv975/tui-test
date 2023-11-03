@@ -4,13 +4,13 @@ module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, '../static-wrapper/libs'),
-        filename: 'date-input-bundle.js',
+        filename: 'display-data-bundle.js',
     },
     devServer: {
         static: {
             directory: path.join(__dirname, 'dist'),
         },
-        port: 3002,
+        port: 3003,
         open: true,
         hot: true,
     },
