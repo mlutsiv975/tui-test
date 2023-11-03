@@ -1,0 +1,10 @@
+.date-picker-container {
+    font-family: Arial, sans-serif;
+}
+
+.date-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
